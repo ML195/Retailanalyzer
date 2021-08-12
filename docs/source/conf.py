@@ -33,6 +33,9 @@ extensions = [
     'sphinx_rtd_theme',
 ]
 
+# Add masterdoc to be index
+master_doc = 'index'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
