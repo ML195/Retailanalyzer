@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>modelcreator.purchasepredictor package &mdash; Retailanalyzer  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/restyle.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelcreator.salesforecaster package" href="modelcreator.salesforecaster.html" />
+    <link rel="prev" title="modelcreator.productrecommender package" href="modelcreator.productrecommender.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Retailanalyzer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modelcreator</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modelcreator.html">modelcreator package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="modelcreator.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.html">modelcreator.datahandler package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.productrecommender.html">modelcreator.productrecommender package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">modelcreator.purchasepredictor package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.salesforecaster.html">modelcreator.salesforecaster package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator.exception">modelcreator.exception module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator.model_creator">modelcreator.model_creator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator.model_creator_utils">modelcreator.model_creator_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Retailanalyzer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">modelcreator</a> &raquo;</li>
+        
+          <li><a href="modelcreator.html">modelcreator package</a> &raquo;</li>
+        
+      <li>modelcreator.purchasepredictor package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/modelcreator.purchasepredictor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="modelcreator-purchasepredictor-package">
+<h1>modelcreator.purchasepredictor package<a class="headerlink" href="#modelcreator-purchasepredictor-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-modelcreator.purchasepredictor.purchase_predictor">
+<span id="modelcreator-purchasepredictor-purchase-predictor-module"></span><h2>modelcreator.purchasepredictor.purchase_predictor module<a class="headerlink" href="#module-modelcreator.purchasepredictor.purchase_predictor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">PurchasePredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_standardization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_existing_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">logging.Logger</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wrapper for a purchase predictor.</p>
+<p>The PurchasePredictor class provides the following functionality:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Get the best model in terms of a threshold optimized generalized F-score (fbeta) for given estimators and hyperparameters through grid search with cross-validation</dt><dd><ul>
+<li><p>The threshold optimized generalized F-score is basically a generalized F-score calculated for a range of thresholds (from 0 to 1 with 0.01 steps), where the maximum score for a specific threshold is then taken as final score.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Loading of pre-existing models with via the name attribute</p></li>
+<li><p>Prediction if a customer with a given customer_id will purchase in the next quarter (label = 1) or not (label = 0) using <code class="docutils literal notranslate"><span class="pre">predict_if_customer_purchases_next_quarter()</span></code>.</p></li>
+<li><p>Get all customers (as customer_id) that are predicted to purchase in the next quarter using <code class="docutils literal notranslate"><span class="pre">get_all_customers_purchasing_next_quarter()</span></code>.</p></li>
+<li><p>Get all customers (as customer_id) that are predicted to not purchase in the next quarter using <code class="docutils literal notranslate"><span class="pre">get_all_customers_not_purchasing_next_quarter()</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passed name used to identify the purchase predictor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._data">
+<span class="sig-name descname"><span class="pre">_data</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passed data as pd.DataFrame containing training (column target == ‘train’) and prediction (column target == ‘prediction’) set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._standardize_data">
+<span class="sig-name descname"><span class="pre">_standardize_data</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._standardize_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passed bool that defines if standardization (x - mu / sigma) should be applied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._load_model">
+<span class="sig-name descname"><span class="pre">_load_model</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._load_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passed bool that defines if a pre-existing model with the same name should be loaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._logger">
+<span class="sig-name descname"><span class="pre">_logger</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passed logger to track execution steps or errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._random_state">
+<span class="sig-name descname"><span class="pre">_random_state</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._random_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Passed random state as int for reproducible results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._model_subdirectory">
+<span class="sig-name descname"><span class="pre">_model_subdirectory</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._model_subdirectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subdirectory name consisting of the class-name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._save_file_format">
+<span class="sig-name descname"><span class="pre">_save_file_format</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._save_file_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>File format used to store the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._model_path">
+<span class="sig-name descname"><span class="pre">_model_path</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._model_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the stored model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._evaluation_dir_path">
+<span class="sig-name descname"><span class="pre">_evaluation_dir_path</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._evaluation_dir_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the directory where the model evaluations are stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._evaluation_file_path">
+<span class="sig-name descname"><span class="pre">_evaluation_file_path</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._evaluation_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the model evaluation file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._optimal_threshold">
+<span class="sig-name descname"><span class="pre">_optimal_threshold</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._optimal_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>The threshold resulting in the best result according to GridSearchCV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._final_model">
+<span class="sig-name descname"><span class="pre">_final_model</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._final_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>A trained sklearn Estimator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Estimator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._final_scaler">
+<span class="sig-name descname"><span class="pre">_final_scaler</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._final_scaler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn StandardScaler used for the standardization of the training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Transformer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._prediction_data">
+<span class="sig-name descname"><span class="pre">_prediction_data</span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._prediction_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subset of the data that is used for prediction only (target == ‘prediction’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._check_settings_validity">
+<span class="sig-name descname"><span class="pre">_check_settings_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._check_settings_validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the given settings are valid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>settings</strong> (<em>list</em>) – The settings for the pruchase predictor as a list with the form: [{‘CLF_NAME’: classifier_name_1, ‘HYPERPARAMS’: {‘parameter_1’: [value_1, value_2, …], ‘parameter_2’: […], …}}, {‘CLF_NAME’: classifier_name_2, ‘HYPERPARAMS’: {…}}, {…}, …].</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the setting or the setting elements have the wrong type.</p></li>
+<li><p><strong>ValueError</strong> – If settings or hyperparameters are an empty list or if a given valid classifier has no <code class="docutils literal notranslate"><span class="pre">predict_proba()</span></code> function.</p></li>
+<li><p><strong>KeyError</strong> – If needed identifiers like CLF_NAME are not present</p></li>
+<li><p><strong>NameError</strong> – If invalid parameter names (not part of a sklearn classifier) are present.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._compute_confusion_matrix">
+<span class="sig-name descname"><span class="pre">_compute_confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_metric</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._compute_confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a confusion matrix.</p>
+<p>This function is used as scorer for the grid search to calculate confusion matrix elements (true negatives, false positives, false negatives, true positives).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array</em>) – The true labels as np.ndarray with shape (n_samples,).</p></li>
+<li><p><strong>y_pred</strong> (<em>array</em>) – The predicted labels as np.ndarray with shape (n_samples,).</p></li>
+<li><p><strong>return_metric</strong> (<em>str</em>) – The metric to return, either ‘TN’ for rue negatives, ‘FP’ for false positives, ‘FN’ for false negatives or ‘TP’ for true positives.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The count of either true negatives (<code class="docutils literal notranslate"><span class="pre">return_metric='TN'</span></code>), false positives (<code class="docutils literal notranslate"><span class="pre">return_metric='FP'</span></code>), false negatives (<code class="docutils literal notranslate"><span class="pre">return_metric='FN'</span></code>) or true positives (<code class="docutils literal notranslate"><span class="pre">return_metric='TP'</span></code>) as integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._evaluate_classifer">
+<span class="sig-name descname"><span class="pre">_evaluate_classifer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sklearn.preprocessing._data.StandardScaler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimal_threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculate_confusion_matrix</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._evaluate_classifer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a given estimator.</p>
+<p>The estimator is evaluated using the generalized F-Score with the given beta value, the balanced accuracy and a confusion matrix (optional).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classifier</strong> (<em>Estimator</em>) – An sklearn estimator object.</p></li>
+<li><p><strong>X_test</strong> (<em>array</em>) – Features of the test data as np.ndarray with the shape (n_samples, n_features).</p></li>
+<li><p><strong>y_test</strong> (<em>array</em>) – Labels of the test data as np.ndarray with the shape (n_samples, ).</p></li>
+<li><p><strong>scaler</strong> (<em>Transformer</em>) – A sklearn StandardScaler object.</p></li>
+<li><p><strong>optimal_threshold</strong> (<em>float</em>) – The threshold from which to classify the label as positive (prediction &gt; optimal_threshold = 1 and prediction &lt;= optimal_threshold = 0) as float.</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – The beta value for the generalized F-score.</p></li>
+<li><p><strong>calculate_confusion_matrix</strong> (<em>bool</em>) – Determines if the confusion matrix should be calculated and returned as additional “score”. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If <code class="docutils literal notranslate"><span class="pre">calculate_confusion_matrix=False</span></code> a tuple with two elements, including the fbeta score (first element) and the balanced accuracy score (second element). If <code class="docutils literal notranslate"><span class="pre">calculate_confusion_matrix=True</span></code> a tuple with three elements, including the fbeta score (first element), the balanced accuracy score (second element) and the confusion matrix as np.ndarray with shape (n_classes, n_classes).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._format_parameter_output">
+<span class="sig-name descname"><span class="pre">_format_parameter_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._format_parameter_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats parameters for printing.</p>
+<p>Helper function to format model parameters for writing them into the evaluation file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<em>dict</em>) – A dict defining the hyperparameters of the form {‘hyperparamer1’: value, ‘hyperparameter2’: value, …}.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A formatted string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_classifier_to_name">
+<span class="sig-name descname"><span class="pre">_get_classifier_to_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_classifier_to_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an sklearn classifier to the given name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>classifier_name</strong> (<em>str</em>) – The name of the classifier as defined in sklearn.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An sklearn classifier.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>NameError</strong> – If there is no existing classifier to the given name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_prediction_data">
+<span class="sig-name descname"><span class="pre">_get_prediction_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_prediction_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the dataset by the column target == ‘predict’ to obtain prediction data.</p>
+<p>As the dataset includes training data (features calculated on every quarter except the latest one) and prediction data (features calculated on every quarter of the whole dataset), it needs to be seperated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The data to do the predictions on (i.e. predict if a customer purchases next quarter) as pd.DataFrame of the shape (n_customers, n_features), where the index are customer IDs and the columns represent the features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_search_space_entry">
+<span class="sig-name descname"><span class="pre">_get_search_space_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_search_space_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an list element for the grid search space.</p>
+<p>Convenience function for <code class="docutils literal notranslate"><span class="pre">_transform_settings_to_search_space()</span></code> that encapsulates the logic of creating a single search space entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter</strong> (<em>dict</em>) – A dict defining the hyperparameters of the form {‘hyperparamer1’: value, ‘hyperparameter2’: value, …}.</p></li>
+<li><p><strong>clf</strong> (<em>Estimator</em>) – An sklearn estimator object.</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – Prefix to use for the pipeline to identify classifier and hyperparameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[Estimator()], ‘hyperparameter_1’: [value_1, value_2], ‘hyperparameter_2’: […], … }.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A dict representing the search space entry of the form {‘clf’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_training_data">
+<span class="sig-name descname"><span class="pre">_get_training_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._get_training_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the dataset by the column target == ‘train’ to obtain training data</p>
+<p>As the dataset includes training data (features calculated on every quarter except the latest one) and prediction data (features calculated on every quarter of the whole dataset), it needs to be seperated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The training data as tuple containing the features (first element) as np.ndarray of shape (n_samples, n_features) and the corresponding labels (second element) as np.ndarray of shape (n_samples,).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._load_existing_purchase_predictor">
+<span class="sig-name descname"><span class="pre">_load_existing_purchase_predictor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._load_existing_purchase_predictor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads an existing purchase predictor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="modelcreator.html#modelcreator.exception.ModelNotFoundError" title="modelcreator.exception.ModelNotFoundError"><strong>ModelNotFoundError</strong></a> – If there is no pre-existing purchase predictor under the specified path <code class="docutils literal notranslate"><span class="pre">_model_path</span></code>.</p></li>
+<li><p><a class="reference internal" href="modelcreator.html#modelcreator.exception.IncompatibleDataError" title="modelcreator.exception.IncompatibleDataError"><strong>IncompatibleDataError</strong></a> – If the loaded model was trained on standardized data but apply_standardization is set to False or the loaded model was trained on original data but apply_standardization is set to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._obtain_summed_confusion_matrix">
+<span class="sig-name descname"><span class="pre">_obtain_summed_confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_splits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv_results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._obtain_summed_confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a summed confusion matrix out of GridSearchCV results.</p>
+<p>The true negatives, false positives, false negatives and true positives are calculated when doin grid search with cross validation. This function sums these metrics (of the best estimator) over all splits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_splits</strong> (<em>int</em>) – Number of splits performed in CV.</p></li>
+<li><p><strong>cv_results</strong> (<em>dict</em>) – Cross validation results from sklearn’s grid search <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code>.</p></li>
+<li><p><strong>best_index</strong> (<em>int</em>) – Index of the best estimator in the grid search cv results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The summed confusion matrix as np.ndarray with shape (n_classes, n_classes).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._perform_grid_search">
+<span class="sig-name descname"><span class="pre">_perform_grid_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_space</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_fitted_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._perform_grid_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a grid-search with cross validation using the given hyperparameters.</p>
+<p>Based on the given search space, a grid-search with CV (StratifiedKFold with 5 splits) is executed and the best resulting model in terms of a threshold optimized generalized F-score (fbeta) is selected. The threshold optimized generalized F-score is basically a generalized F-score calculated for a range of thresholds (from 0 to 1 with 0.01 steps), where the maximum score for a specific threshold is then taken as final score. This function also takes care of evaluating the best model and computing the confusion matrices, which are stored on disk as plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_space</strong> (<em>list</em>) – A list representing a valid search space with estimator and hyperparameter. For example: [{‘clf’: [Classifier_1()], ‘clf__parameter_1’: [value_1, value_2, …], ‘clf__parameter_2’: […], …}, {‘clf’: [Classifier_2()], ‘clf__parameter_1’: […], …}, {…}, …].</p></li>
+<li><p><strong>X_train</strong> (<em>array</em>) – The features of the training data as np.ndarray with shape (n_samples, n_features).</p></li>
+<li><p><strong>y_train</strong> (<em>array</em>) – The label of the test data as np.ndarray with shape (n_samples, 1).</p></li>
+<li><p><strong>X_test</strong> (<em>array</em>) – The features of the test data as np.ndarray with shape (n_samples, n_features).</p></li>
+<li><p><strong>y_test</strong> (<em>array</em>) – The label of the test data as np.ndarray with shape (n_samples, 1).</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – The beta value for the generalized F-score.</p></li>
+<li><p><strong>return_fittd_model</strong> (<em>bool</em>) – Determines if a fitted model should be returned. Default is False (returns unfitted Estimator object with parameter configuration).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value, ‘hyperparameter_2’: value, …}.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A tuple with three elements, where the first element is an unfitted or fitted estimator (depending on <code class="docutils literal notranslate"><span class="pre">return_fittd_model</span></code>), the second element is the optimal prediction threshold and the third element are the best parameters (without prefix) as dict of the form {‘hyperparameter_1’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._plot_confusion_matrix">
+<span class="sig-name descname"><span class="pre">_plot_confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">confusion_matrix</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._plot_confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a confusion matrix and stores the plot on disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>confusion_matrix</strong> (<em>array</em>) – The confusion matrix as np.ndarray with the shape (n_classes, n_classes).</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Title of the plot.</p></li>
+<li><p><strong>save_path</strong> (<em>Path</em>) – The path to which to store the plot to as Path object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._predict_labels">
+<span class="sig-name descname"><span class="pre">_predict_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.series.Series</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._predict_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the labels for the prediction data.</p>
+<p>Convenience function that predicts the labels for the prediction dataset with the <code class="docutils literal notranslate"><span class="pre">_final_model</span></code> using the <code class="docutils literal notranslate"><span class="pre">_optimal_threshold</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The predicted labels as pd.Series, where the index consists of customer IDs and the values are the labels.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._set_final_model">
+<span class="sig-name descname"><span class="pre">_set_final_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._set_final_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the final pruchase predictor model.</p>
+<p>Fits an sklearn estimator (with the best parameter combination resulting from grid search) on the given data and stores the model on disk. The estimator can then be used for predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classifier</strong> (<em>Estimator</em>) – An sklearn estimator object.</p></li>
+<li><p><strong>X</strong> (<em>array</em>) – Features on which to fit the classifer on as np.ndarray with the shape (n_samples, n_features).</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – Target labels as np.ndarray with the shape (n_samples,).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._threshold_optimized_fbeta_score">
+<span class="sig-name descname"><span class="pre">_threshold_optimized_fbeta_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._threshold_optimized_fbeta_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the threshold optimized generalized F-score (fbeta).</p>
+<p>The threshold optimized generalized F-score is basically a generalized F-score calculated for a range of thresholds (from 0 to 1 with 0.01 steps), where the maximum score for a specific threshold is then taken as final score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array</em>) – The true labels as np.ndarray with shape (n_samples,).</p></li>
+<li><p><strong>y_pred</strong> (<em>array</em>) – The predicted labels as np.ndarray with shape (n_samples,).</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – The beta value for the generalized F-score.</p></li>
+<li><p><strong>return_threshold</strong> (<em>bool</em>) – Determines if the maximal score or the corresponding threshold at which the maximal score was achieved should be returned. Default is False (returns maximal score).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If <code class="docutils literal notranslate"><span class="pre">return_threshold</span> <span class="pre">=</span> <span class="pre">False</span></code> the maximal generalized F-score (fbeta) is returned. If <code class="docutils literal notranslate"><span class="pre">return_threshold</span> <span class="pre">=</span> <span class="pre">True</span></code> the corresponding threshold at which the maximal generalized F-score was achieved is returned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._transform_settings_to_search_space">
+<span class="sig-name descname"><span class="pre">_transform_settings_to_search_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor._transform_settings_to_search_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the passed purchase predictor settings to a valid gird-search space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>settings</strong> (<em>list</em>) – The settings for the pruchase predictor as a list with the form: [{‘CLF_NAME’: classifier_name_1, ‘HYPERPARAMS’: {‘parameter_1’: [value_1, value_2, …], ‘parameter_2’: […], …}}, {‘CLF_NAME’: classifier_name_2, ‘HYPERPARAMS’: {…}}, {…}, …].</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[{‘clf’: [Classifier_1()], ‘clf__parameter_1’: [value_1, value_2, …], ‘clf__parameter_2’: […], …}, {‘clf’: [Classifier_2()], ‘clf__parameter_1’: […], …}, {…}, …].</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A list representing a valid search space. For example</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.get_all_customers_not_purchasing_next_quarter">
+<span class="sig-name descname"><span class="pre">get_all_customers_not_purchasing_next_quarter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.get_all_customers_not_purchasing_next_quarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all customers that are predicted to not purchase in the next quarter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list with the customer IDs of customers that were predicted to not purchase in the next quarter.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="modelcreator.html#modelcreator.exception.NoTrainedModelError" title="modelcreator.exception.NoTrainedModelError"><strong>NoTrainedModelError</strong></a> – If there is no trained model to make predictions with.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.get_all_customers_purchasing_next_quarter">
+<span class="sig-name descname"><span class="pre">get_all_customers_purchasing_next_quarter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.get_all_customers_purchasing_next_quarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all customers that are predicted to purchase in the next quarter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list with the customer IDs of customers that were predicted to purchase in the next quarter.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="modelcreator.html#modelcreator.exception.NoTrainedModelError" title="modelcreator.exception.NoTrainedModelError"><strong>NoTrainedModelError</strong></a> – If there is no trained model to make predictions with.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.initialize_purchase_predictor">
+<span class="sig-name descname"><span class="pre">initialize_purchase_predictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.initialize_purchase_predictor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes PurchasePredictor instance</p>
+<p>This function includes the following steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set the beta value for the generalized F-score (fbeta score)</p></li>
+<li><p>Create a subfolder for the PurchasePredictor in the models and evaluation folder if it does not exist already</p></li>
+<li><p>Create an evaluation file for the recommender</p></li>
+<li><dl class="simple">
+<dt>Prepare data for subsequent steps</dt><dd><ul>
+<li><p>Split in training and prediction dataset</p></li>
+<li><p>Perform stratified train-test split</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Perform grid search and find the best model with the best threshold for prediction</dt><dd><ul>
+<li><p>Evaluate the model on the hold-out test set</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">_final_model</span></code> attribute with a model trained on the whole training set</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_size</strong> (<em>int</em><em> or </em><em>float</em>) – How many samples of the training data should be used as a hold-out test set. If float (should be between 0.0 and 1.0), the value represents the proportion of the dataset used as test samples. If int, the value represents the absolute number of test samples.</p></li>
+<li><p><strong>settings</strong> (<em>list</em>) – The settings for the pruchase predictor as a list with the form: [{‘CLF_NAME’: classifier_name_1, ‘HYPERPARAMS’: {‘parameter_1’: [value_1, value_2, …], ‘parameter_2’: […], …}}, {‘CLF_NAME’: classifier_name_2, ‘HYPERPARAMS’: {…}}, {…}, …].</p></li>
+<li><p><strong>**kwargs</strong> – Additional parameters. Takes beta.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If settings are not specified.</p></li>
+<li><p><strong>TypeError</strong> – If a beta is given and it is not of type int or float.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.predict_if_customer_purchases_next_quarter">
+<span class="sig-name descname"><span class="pre">predict_if_customer_purchases_next_quarter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_if_not_exists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#modelcreator.purchasepredictor.purchase_predictor.PurchasePredictor.predict_if_customer_purchases_next_quarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the label (1 = purchases next quarter, 0 = does not purchase next quarter) for a given <code class="docutils literal notranslate"><span class="pre">customer_id</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>customer_id</strong> (<em>float</em><em> or </em><em>list</em>) – A customer’s ID for which to get the label. If <code class="docutils literal notranslate"><span class="pre">customer_id</span></code> is given as list it should include multiple customer IDs for example [id_1, id_2, …] of type float.</p></li>
+<li><p><strong>ignore_if_not_exists</strong> (<em>bool</em>) – Determines what to do when a given <code class="docutils literal notranslate"><span class="pre">customer_id</span></code> does not exist. Defaul is False, which raises an error. True will return None. If <code class="docutils literal notranslate"><span class="pre">customer_id``is</span> <span class="pre">a</span> <span class="pre">list,</span> <span class="pre">``ignore_if_not_exists=True</span></code> will return np.nan for the entry.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If <code class="docutils literal notranslate"><span class="pre">customer_id</span></code> was is given as float, the predicted label (1 = purchases next quarter, 0 = does not purchase next quarter) to the given <code class="docutils literal notranslate"><span class="pre">customer_id</span></code>. If the passed <code class="docutils literal notranslate"><span class="pre">customer_id</span></code> is a list the label for each customer ID in the list as pd.Series where the index represents the customers’ ID and the values the corresponding labels.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the customer under the given ID does not exist.</p></li>
+<li><p><strong>TypeError</strong> – If the given <code class="docutils literal notranslate"><span class="pre">customer_id</span></code> is not of type float.</p></li>
+<li><p><a class="reference internal" href="modelcreator.html#modelcreator.exception.NoTrainedModelError" title="modelcreator.exception.NoTrainedModelError"><strong>NoTrainedModelError</strong></a> – If there is no trained model to make predictions with.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.purchasepredictor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelcreator.purchasepredictor" title="Permalink to this headline">¶</a></h2>
+<p>purchasepredictor package</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="modelcreator.salesforecaster.html" class="btn btn-neutral float-right" title="modelcreator.salesforecaster package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modelcreator.productrecommender.html" class="btn btn-neutral float-left" title="modelcreator.productrecommender package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Luckeneder Marcel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

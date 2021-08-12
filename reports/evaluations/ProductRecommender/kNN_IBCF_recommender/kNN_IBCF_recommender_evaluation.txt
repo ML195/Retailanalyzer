@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------
+General Model Info
+-------------------------------------------------------------------------
+	Model-Name: kNN_IBCF_recommender
+	Model-Type: kNN-Inspired Item-Based Collaborative Filtering
+	Hyperparameters: 
+		 number_of_recommendations: 15
+		 similarity_function: cosine
+
+-------------------------------------------------------------------------
+Mean Hit-Rate (5 Random Splits) (10 Items per Customer in Test Set)
+-------------------------------------------------------------------------
+	Hit-Rate: 13.371%
+	Reciprocal Hit-Rate: 3.464%

@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>modelcreator.datahandler.preprocessor package &mdash; Retailanalyzer  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/restyle.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelcreator.productrecommender package" href="modelcreator.productrecommender.html" />
+    <link rel="prev" title="modelcreator.datahandler package" href="modelcreator.datahandler.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Retailanalyzer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modelcreator</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modelcreator.html">modelcreator package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="modelcreator.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="modelcreator.datahandler.html">modelcreator.datahandler package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.productrecommender.html">modelcreator.productrecommender package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.purchasepredictor.html">modelcreator.purchasepredictor package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.salesforecaster.html">modelcreator.salesforecaster package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator.exception">modelcreator.exception module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator.model_creator">modelcreator.model_creator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator.model_creator_utils">modelcreator.model_creator_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.html#module-modelcreator">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Retailanalyzer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">modelcreator</a> &raquo;</li>
+        
+          <li><a href="modelcreator.html">modelcreator package</a> &raquo;</li>
+        
+          <li><a href="modelcreator.datahandler.html">modelcreator.datahandler package</a> &raquo;</li>
+        
+      <li>modelcreator.datahandler.preprocessor package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/modelcreator.datahandler.preprocessor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="modelcreator-datahandler-preprocessor-package">
+<h1>modelcreator.datahandler.preprocessor package<a class="headerlink" href="#modelcreator-datahandler-preprocessor-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-modelcreator.datahandler.preprocessor.interface_preprocessor">
+<span id="modelcreator-datahandler-preprocessor-interface-preprocessor-module"></span><h2>modelcreator.datahandler.preprocessor.interface_preprocessor module<a class="headerlink" href="#module-modelcreator.datahandler.preprocessor.interface_preprocessor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">IPreprocessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">interface.interface.Interface</span></code></p>
+<p>Preprocessor interface.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor._INTERFACE_IGNORE_MEMBERS">
+<span class="sig-name descname"><span class="pre">_INTERFACE_IGNORE_MEMBERS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'__new__',</span> <span class="pre">'from_class'}</span></em><a class="headerlink" href="#modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor._INTERFACE_IGNORE_MEMBERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor._defaults">
+<span class="sig-name descname"><span class="pre">_defaults</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{}</span></em><a class="headerlink" href="#modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor._defaults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor._signatures">
+<span class="sig-name descname"><span class="pre">_signatures</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'get_preprocessed_data':</span> <span class="pre">&lt;TypedSignature</span> <span class="pre">type=function,</span> <span class="pre">signature=(self,</span> <span class="pre">raw_data:</span> <span class="pre">pandas.core.frame.DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas.core.frame.DataFrame&gt;}</span></em><a class="headerlink" href="#modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor._signatures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor.from_class">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">existing_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor.from_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an interface from an existing class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>existing_class</strong> (<em>type</em>) – The type from which to extract an interface.</p></li>
+<li><p><strong>subset</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – List of methods that should be included in the interface.
+Default is to use all attributes not defined in an empty class.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the generated interface.
+Default is <code class="docutils literal notranslate"><span class="pre">existing_class.__name__</span> <span class="pre">+</span> <span class="pre">'Interface'</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>interface</strong> – A new interface class with stubs generated from <code class="docutils literal notranslate"><span class="pre">existing_class</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor.get_preprocessed_data">
+<span class="sig-name descname"><span class="pre">get_preprocessed_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.interface_preprocessor.IPreprocessor.get_preprocessed_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocesses the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The preprocessed data as pd.DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.datahandler.preprocessor.preprocessor_utils">
+<span id="modelcreator-datahandler-preprocessor-preprocessor-utils-module"></span><h2>modelcreator.datahandler.preprocessor.preprocessor_utils module<a class="headerlink" href="#module-modelcreator.datahandler.preprocessor.preprocessor_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.preprocessor_utils.get_indices_of_purchases_with_instant_cancellations">
+<span class="sig-name descname"><span class="pre">get_indices_of_purchases_with_instant_cancellations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.preprocessor_utils.get_indices_of_purchases_with_instant_cancellations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get indices for purchases that are followed by their cancellation within 14 days.</p>
+<p>Utility function that can be used by preprocessors. It was written for data cleaning purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – Data that contains the columns ‘CustomerID’, ‘Invoice’, ‘InvoiceDate’, ‘StockCode’, ‘Quantity’ and ‘Price’.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list containing the indices of pruchases that are followed by their cancellation within 14 days.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.datahandler.preprocessor.product_recommender_preprocessor">
+<span id="modelcreator-datahandler-preprocessor-product-recommender-preprocessor-module"></span><h2>modelcreator.datahandler.preprocessor.product_recommender_preprocessor module<a class="headerlink" href="#module-modelcreator.datahandler.preprocessor.product_recommender_preprocessor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ProductRecommenderPreprocessor</span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">interface.interface.ImplementsIPreprocessor</span></code></p>
+<p>Preprocessor for product recommending tasks (implements the IPreprocessor interface).</p>
+<p>Enables the transformation of the given data into a customer-item matrix with CustomerID as rows and StockCodes (products) as columns, where purchased products are designated as 1.0, whereas the rest is set to 0.0.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor._get_cleaned_data">
+<span class="sig-name descname"><span class="pre">_get_cleaned_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor._get_cleaned_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleans the data and returns it.</p>
+<p>The data cleaning consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dropping rows with missing CustomerID</p></li>
+<li><p>Removing rows with StockCodes that not affect the number of purchases (e.g. postage, charity, discounts, internal adjustments, etc.)</p></li>
+<li><p>Removing purchases that are directly (within 14 days) followed by their full cancellation</p></li>
+<li><p>Removing all cancellations as they have nothing to do with purchase numbers</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The cleaned data as pd.DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor._interfaces">
+<span class="sig-name descname"><span class="pre">_interfaces</span></span><em class="property"> <span class="pre">=</span> <span class="pre">frozenset({})</span></em><a class="headerlink" href="#modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor._interfaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor.get_preprocessed_data">
+<span class="sig-name descname"><span class="pre">get_preprocessed_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.product_recommender_preprocessor.ProductRecommenderPreprocessor.get_preprocessed_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess data for product recommending.</p>
+<dl class="simple">
+<dt>The preprocessing consists of:</dt><dd><ul class="simple">
+<li><p>Cleaning the data</p></li>
+<li><p>Taking a subset of the data with columns CustomerID and StockCode</p></li>
+<li><p>Drop duplicate rows as it is only important to know which products a customer bought at least one time</p></li>
+<li><p>Create a additional column called “purchased”, which designates that a customer bought that product</p></li>
+<li><p>Create a customer-item-matrix with CustomerID as rows and StockCodes (products) as columns (if a customer bought an item there is a 1.0 at cell [CustomerID, StockCode] otherwise the value is 0.0)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The preprocessed data as pd.DataFrame, representing a customer-item-matrix with CustomerID as rows and StockCodes as columns</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor">
+<span id="modelcreator-datahandler-preprocessor-purchase-predictor-preprocessor-module"></span><h2>modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor module<a class="headerlink" href="#module-modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">PurchasePredictorPreprocessor</span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">interface.interface.ImplementsIPreprocessor</span></code></p>
+<p>Preprocessor for purchase prediction tasks (implements the IPreprocessor interface).</p>
+<p>Enables the transformation of the given data into a data set with the following features for each customer:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘recency’ -&gt; recency of last pruchase</p></li>
+<li><p>‘frequency’ -&gt; frequency of pruchases</p></li>
+<li><p>‘diff_purchase_t_1’, …, ‘diff_purchase_t_n-1’ -&gt; differences between the latest purchase and the last n-1 purchases</p></li>
+<li><p>‘purchase_subsequent_quarters’ -&gt; number of times the customer bought in two subsequent quarters</p></li>
+<li><p>‘y_label’ -&gt; binary label (1.0 = yes, 0.0 = no) defining if the customer placed orders in the latest quarter and in the previous one</p></li>
+<li><p>‘target’ designation if data is for training (‘train’) or should be used to predict (‘predict’)</p></li>
+</ul>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_RF">
+<span class="sig-name descname"><span class="pre">_get_RF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_RF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the recency and frequency of purchases for customers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – Data containing the columns ‘InvoiceDate’ and ‘CustomerID’ as pd.DataFrame.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The recency and frequency of purchases for each customer as a pd.DataFrame with CustomerID as index and ‘recency’ and ‘frequency’ as columns.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_cleaned_data">
+<span class="sig-name descname"><span class="pre">_get_cleaned_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_cleaned_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleans the data and returns it.</p>
+<dl class="simple">
+<dt>The data cleaning consists of:</dt><dd><ul class="simple">
+<li><p>Dropping rows with missing CustomerID</p></li>
+<li><p>Removing rows with StockCodes that not affect the number of purchases (e.g. postage, charity, discounts, internal adjustments, etc.)</p></li>
+<li><p>Removing purchases that are directly (within 14 days) followed by their full cancellation</p></li>
+<li><p>Removing all cancellations as they have nothing to do with purchase numbers</p></li>
+<li><p>To make working with InvoiceDates more convenient (as only the day of purchase is important) they are normalized to 00:00:00</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The cleaned data as pd.DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_current_quarter_begin_and_end_to_date">
+<span class="sig-name descname"><span class="pre">_get_current_quarter_begin_and_end_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas._libs.tslibs.timestamps.Timestamp</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_current_quarter_begin_and_end_to_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get beginning and end date of current quarter in relation to the given date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>date</strong> (<em>Timestamp</em>) – Date of type pd.Timestamp.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of type (pd.Timestamp, pd.Timestamp) containing the date of the beginning and end of the current quarter in relation to <code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_days_between_last_n_purchases">
+<span class="sig-name descname"><span class="pre">_get_days_between_last_n_purchases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_days_between_last_n_purchases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the difference in days between the latest purchase and the last <code class="docutils literal notranslate"><span class="pre">n-1</span></code> purchases for customers.</p>
+<p>For example: if <code class="docutils literal notranslate"><span class="pre">n=3</span></code> the days between the latest purchase (n=1) and the purchase at t-1 (n=2) as well as the days between the latest pruchase (n=1) and the purchase at t-2 (n=3) are calculated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>DataFrame</em>) – Data containing the columns ‘InvoiceDate’ and ‘CustomerID’ as pd.DataFrame.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of purchases to include.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>index is a Float64Index([12347.0], dtype=’float64’, name=’CustomerID’) with columns [diff_purchase_t_1  diff_purchase_t_2] and values [37.0, 127.0].</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>The difference in days between the latest purchase and the last <code class="docutils literal notranslate"><span class="pre">n-1</span></code> purchases for each customer as pd.DataFrame, with CustomerID as index and the <code class="docutils literal notranslate"><span class="pre">n-1</span></code> differences as columns. For example with <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">3</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_next_quarter_begin_and_end_to_date">
+<span class="sig-name descname"><span class="pre">_get_next_quarter_begin_and_end_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas._libs.tslibs.timestamps.Timestamp</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_next_quarter_begin_and_end_to_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get beginning and end date of next quarter in relation to the given date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>date</strong> (<em>Timestamp</em>) – Date of type pd.Timestamp.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of type (pd.Timestamp, pd.Timestamp) containing the date of the beginning and end of the next quarter in relation to <code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_next_quarter_purchase_label">
+<span class="sig-name descname"><span class="pre">_get_next_quarter_purchase_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">past_quarters</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_quarter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.series.Series</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_next_quarter_purchase_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get binary labels (1.0 = yes, 0.0 = no) if customers placed orders in the last quarter of <code class="docutils literal notranslate"><span class="pre">past_quarters</span></code> and in the current quarter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>past_quarters</strong> (<em>DataFrame</em>) – Data representing the quarters prior to the last one in the data as pd.DataFrame containing the columns ‘InvoiceDate’ and ‘CustomerID’.</p></li>
+<li><p><strong>current_quarter</strong> (<em>DataFrame</em>) – Data representing the last quarter in the data as pd.DataFrame containing the columns ‘InvoiceDate’ and ‘CustomerID’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The binary labels (1.0 = yes, 0.0 = no) defining if customers placed orders in the last quarter of <code class="docutils literal notranslate"><span class="pre">past_quarters</span></code> as well as in the current quarter as a pd.Series, with CustomerID as index and the corresponding binary label ‘y_label’ as values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_previous_quarter_begin_and_end_to_date">
+<span class="sig-name descname"><span class="pre">_get_previous_quarter_begin_and_end_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas._libs.tslibs.timestamps.Timestamp</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_previous_quarter_begin_and_end_to_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get beginning and end date of previous quarter in relation to the given date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>date</strong> (<em>Timestamp</em>) – Date of type pd.Timestamp.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of type (pd.Timestamp, pd.Timestamp) containing the date of the beginning and end of the previous quarter in relation to <code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_times_customer_bought_next_quarter">
+<span class="sig-name descname"><span class="pre">_get_times_customer_bought_next_quarter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.series.Series</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._get_times_customer_bought_next_quarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of times a customer placed orders in two subsequent months over the timespan of the given data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – Data containing the columns ‘InvoiceDate’ and ‘CustomerID’ as pd.DataFrame.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The number of times a customer bought in the next quarter as pd.Series, where the CustomerID is the index and the values represent the times the customer placed orders in two subsequent months over the timespan of <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._interfaces">
+<span class="sig-name descname"><span class="pre">_interfaces</span></span><em class="property"> <span class="pre">=</span> <span class="pre">frozenset({})</span></em><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._interfaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._separate_current_quarter_from_past_quarters">
+<span class="sig-name descname"><span class="pre">_separate_current_quarter_from_past_quarters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor._separate_current_quarter_from_past_quarters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separate <code class="docutils literal notranslate"><span class="pre">data</span></code> into latest quarter and quarters prior to the latest one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataFrame</em>) – Data containing the columns ‘InvoiceDate’ and ‘CustomerID’ as pd.DataFrame.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of the form (pd.DataFrame, pd.DataFrame) that contains the quarters prior to the latest one in <code class="docutils literal notranslate"><span class="pre">data</span></code> as first element and the data to the latest quarter as second element.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor.get_preprocessed_data">
+<span class="sig-name descname"><span class="pre">get_preprocessed_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor.PurchasePredictorPreprocessor.get_preprocessed_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess data for purchase prediction.</p>
+<p>The preprocessing consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Cleaning the data</p></li>
+<li><p>Splitting the data into current quarter (latest quarter in the data) and past quarters (quarters prior to the latest one)</p></li>
+<li><dl class="simple">
+<dt>Calculating the features with</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">_get_RF()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_get_days_between_last_n_purchases()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_get_times_customer_bought_next_quarter()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Calculate the label with</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">_get_next_quarter_purchase_label()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Concatenate the features and labels into a pd.DataFrame</p></li>
+<li><p>Drop customers thar are below a frequency of 3</p></li>
+<li><p>Designate the created data with ‘target’ = ‘train’ to indicate that the data should be used for training the predictor</p></li>
+<li><p>Repeat the same steps for the whole data (not split between current and past quarters), to use it to predict if a customer will buy next quarter (outside the given data), designated with ‘target’ = ‘predict’</p></li>
+<li><p>Concatenate the data for training and prediction and return it</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The preprocessed data as pd.DataFrame, representing a customer-item-matrix with CustomerID as rows and StockCodes as columns</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor">
+<span id="modelcreator-datahandler-preprocessor-sales-forecaster-preprocessor-module"></span><h2>modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor module<a class="headerlink" href="#module-modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SalesForecasterPreprocessor</span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">interface.interface.ImplementsIPreprocessor</span></code></p>
+<p>Preprocessor for sales forecasting tasks (implements the IPreprocessor interface).</p>
+<p>Enables the transformation of the given data into a time series with weekly aggregated sales.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor._get_cleaned_data">
+<span class="sig-name descname"><span class="pre">_get_cleaned_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor._get_cleaned_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleans the data and returns it.</p>
+<p>The data cleaning consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dropping rows with missing CustomerID</p></li>
+<li><p>Remove rows with StockCodes that not affect sales numbers (e.g. postage, charity, internal adjustments, etc.)</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The cleaned data as pd.DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor._interfaces">
+<span class="sig-name descname"><span class="pre">_interfaces</span></span><em class="property"> <span class="pre">=</span> <span class="pre">frozenset({})</span></em><a class="headerlink" href="#modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor._interfaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor.get_preprocessed_data">
+<span class="sig-name descname"><span class="pre">get_preprocessed_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor.SalesForecasterPreprocessor.get_preprocessed_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocesses data for sales forecasting.</p>
+<p>The preprocessing consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Cleaning the data</p></li>
+<li><p>Calculatíng the total price (quantity * price) for a purchase</p></li>
+<li><p>Generating a time series as a pd.DataFrame with time steps as index and the total price as values</p></li>
+<li><p>Aggregate the total price per week</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_data</strong> (<em>DataFrame</em>) – The data in its orignal format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The preprocessed data as pd.DataFrame, representing the time series with aggregated total price per week.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.datahandler.preprocessor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelcreator.datahandler.preprocessor" title="Permalink to this headline">¶</a></h2>
+<p>preprocessor package</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="modelcreator.productrecommender.html" class="btn btn-neutral float-right" title="modelcreator.productrecommender package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modelcreator.datahandler.html" class="btn btn-neutral float-left" title="modelcreator.datahandler package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Luckeneder Marcel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

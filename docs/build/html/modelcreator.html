@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>modelcreator package &mdash; Retailanalyzer  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/restyle.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelcreator.datahandler package" href="modelcreator.datahandler.html" />
+    <link rel="prev" title="modelcreator" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Retailanalyzer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modelcreator</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">modelcreator package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.html">modelcreator.datahandler package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.productrecommender.html">modelcreator.productrecommender package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.purchasepredictor.html">modelcreator.purchasepredictor package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.salesforecaster.html">modelcreator.salesforecaster package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-modelcreator.exception">modelcreator.exception module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-modelcreator.model_creator">modelcreator.model_creator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-modelcreator.model_creator_utils">modelcreator.model_creator_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-modelcreator">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Retailanalyzer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">modelcreator</a> &raquo;</li>
+        
+      <li>modelcreator package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/modelcreator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="modelcreator-package">
+<h1>modelcreator package<a class="headerlink" href="#modelcreator-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modelcreator.datahandler.html">modelcreator.datahandler package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.datahandler.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html">modelcreator.datahandler.preprocessor package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#module-modelcreator.datahandler.preprocessor.interface_preprocessor">modelcreator.datahandler.preprocessor.interface_preprocessor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#module-modelcreator.datahandler.preprocessor.preprocessor_utils">modelcreator.datahandler.preprocessor.preprocessor_utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#module-modelcreator.datahandler.preprocessor.product_recommender_preprocessor">modelcreator.datahandler.preprocessor.product_recommender_preprocessor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#module-modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor">modelcreator.datahandler.preprocessor.purchase_predictor_preprocessor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#module-modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor">modelcreator.datahandler.preprocessor.sales_forecaster_preprocessor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelcreator.datahandler.preprocessor.html#module-modelcreator.datahandler.preprocessor">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.datahandler.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.datahandler.html#module-modelcreator.datahandler.data_handler">modelcreator.datahandler.data_handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.datahandler.html#module-modelcreator.datahandler">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelcreator.productrecommender.html">modelcreator.productrecommender package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.productrecommender.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.productrecommender.html#module-modelcreator.productrecommender.product_recommender">modelcreator.productrecommender.product_recommender module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.productrecommender.html#module-modelcreator.productrecommender">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelcreator.purchasepredictor.html">modelcreator.purchasepredictor package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.purchasepredictor.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.purchasepredictor.html#module-modelcreator.purchasepredictor.purchase_predictor">modelcreator.purchasepredictor.purchase_predictor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.purchasepredictor.html#module-modelcreator.purchasepredictor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelcreator.salesforecaster.html">modelcreator.salesforecaster package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.salesforecaster.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.salesforecaster.html#module-modelcreator.salesforecaster.arima_forecaster">modelcreator.salesforecaster.arima_forecaster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.salesforecaster.html#module-modelcreator.salesforecaster.forecaster_utils">modelcreator.salesforecaster.forecaster_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.salesforecaster.html#module-modelcreator.salesforecaster.interface_forecaster">modelcreator.salesforecaster.interface_forecaster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.salesforecaster.html#module-modelcreator.salesforecaster.lstm_forecaster">modelcreator.salesforecaster.lstm_forecaster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelcreator.salesforecaster.html#module-modelcreator.salesforecaster">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-modelcreator.exception">
+<span id="modelcreator-exception-module"></span><h2>modelcreator.exception module<a class="headerlink" href="#module-modelcreator.exception" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="modelcreator.exception.CorruptRecommenderError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">CorruptRecommenderError</span></span><a class="headerlink" href="#modelcreator.exception.CorruptRecommenderError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelcreator.exception.ModelCreatorError" title="modelcreator.exception.ModelCreatorError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelcreator.exception.ModelCreatorError</span></code></a></p>
+<p>Raised when required recommender model files are missing.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.exception.CorruptRecommenderError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#modelcreator.exception.CorruptRecommenderError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.exception.CorruptRecommenderError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.CorruptRecommenderError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modelcreator.exception.IncompatibleDataError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">IncompatibleDataError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.IncompatibleDataError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelcreator.exception.ModelCreatorError" title="modelcreator.exception.ModelCreatorError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelcreator.exception.ModelCreatorError</span></code></a></p>
+<p>Raised when errors occur because of wrong data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.exception.IncompatibleDataError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#modelcreator.exception.IncompatibleDataError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.exception.IncompatibleDataError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.IncompatibleDataError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modelcreator.exception.ModelCreatorError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">ModelCreatorError</span></span><a class="headerlink" href="#modelcreator.exception.ModelCreatorError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception base class for modelcreator.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.exception.ModelCreatorError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#modelcreator.exception.ModelCreatorError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.exception.ModelCreatorError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.ModelCreatorError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modelcreator.exception.ModelNotFoundError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">ModelNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.ModelNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelcreator.exception.ModelCreatorError" title="modelcreator.exception.ModelCreatorError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelcreator.exception.ModelCreatorError</span></code></a></p>
+<p>Raised when a model cannot be found on a specified path.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.exception.ModelNotFoundError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#modelcreator.exception.ModelNotFoundError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.exception.ModelNotFoundError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.ModelNotFoundError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modelcreator.exception.NoTrainedModelError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">NoTrainedModelError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.NoTrainedModelError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelcreator.exception.ModelCreatorError" title="modelcreator.exception.ModelCreatorError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelcreator.exception.ModelCreatorError</span></code></a></p>
+<p>Raised when a model was not trained yet but prediction-based functions are called.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelcreator.exception.NoTrainedModelError.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#modelcreator.exception.NoTrainedModelError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelcreator.exception.NoTrainedModelError.with_traceback">
+<span class="sig-name descname"><span class="pre">with_traceback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.exception.NoTrainedModelError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.model_creator">
+<span id="modelcreator-model-creator-module"></span><h2>modelcreator.model_creator module<a class="headerlink" href="#module-modelcreator.model_creator" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelcreator.model_creator.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.model_creator.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates models with different configurations to compare them and to pick a final model for the tasks.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator.model_creator_utils">
+<span id="modelcreator-model-creator-utils-module"></span><h2>modelcreator.model_creator_utils module<a class="headerlink" href="#module-modelcreator.model_creator_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelcreator.model_creator_utils.check_type">
+<span class="sig-name descname"><span class="pre">check_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.model_creator_utils.check_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple helper function that checks if the passed parameters of the function are of the specified types in <code class="docutils literal notranslate"><span class="pre">signature</span></code>.</p>
+<p>General utility function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signature</strong> (<em>list</em>) – A list of types containing the types of the function of which to check the passed parameters. For example for the function foo(a: str, b: bool, c: Union[int, float]) the signature list would look like [str, bool, (int, float)].</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em>) – The parameters of the function as dict. Bascially the result of locals().</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the type of the parameter is not as specified.</p></li>
+<li><p><strong>ValueError</strong> – If the number of passed signatures (<code class="docutils literal notranslate"><span class="pre">signature</span></code>) exceed the number of passed function parameters (<code class="docutils literal notranslate"><span class="pre">parameters</span></code>) or vice versa.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelcreator.model_creator_utils.get_title_line">
+<span class="sig-name descname"><span class="pre">get_title_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.model_creator_utils.get_title_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple helper function that returns an formated title for writing into evaluation textfiles</p>
+<p>Utility function that can be used by a forecaster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>str</em>) – The title to format of as string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A formatted string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelcreator.model_creator_utils.write_to_report_file">
+<span class="sig-name descname"><span class="pre">write_to_report_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines_to_write</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation_file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelcreator.model_creator_utils.write_to_report_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple helper function that writes one line or multiple lines to a file.</p>
+<p>General utility function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lines_to_write</strong> (<em>str</em><em> or </em><em>list</em>) – The text to write to the file as a single line (str) or a list of lines (list of str).</p></li>
+<li><p><strong>evaluation_file_path</strong> (<em>Path</em>) – The path of the file to which to write the text as Path object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the <code class="docutils literal notranslate"><span class="pre">lines_to_write</span></code> are neither of type str nor of type list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-modelcreator">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelcreator" title="Permalink to this headline">¶</a></h2>
+<p>modelcreator package</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="modelcreator.datahandler.html" class="btn btn-neutral float-right" title="modelcreator.datahandler package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-left" title="modelcreator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Luckeneder Marcel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

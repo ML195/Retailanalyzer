@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  color: #999;
+}
+
+h1 {
+  font-size: 24px;
+  color: black;
+}
+
+h2 {
+  font-size: 16px;
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+a {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+#environment td {
+  padding: 5px;
+  border: 1px solid #E6E6E6;
+}
+#environment tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed,
+.passed .col-result {
+  color: green;
+}
+
+span.skipped,
+span.xfailed,
+span.rerun,
+.skipped .col-result,
+.xfailed .col-result,
+.rerun .col-result {
+  color: orange;
+}
+
+span.error,
+span.failed,
+span.xpassed,
+.error .col-result,
+.failed .col-result,
+.xpassed .col-result {
+  color: red;
+}
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+#results-table {
+  border: 1px solid #e6e6e6;
+  color: #999;
+  font-size: 12px;
+  width: 100%;
+}
+#results-table th,
+#results-table td {
+  padding: 5px;
+  border: 1px solid #E6E6E6;
+  text-align: left;
+}
+#results-table th {
+  font-weight: bold;
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+.log {
+  background-color: #e6e6e6;
+  border: 1px solid #e6e6e6;
+  color: black;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  height: 230px;
+  overflow-y: scroll;
+  padding: 5px;
+  white-space: pre-wrap;
+}
+.log:only-child {
+  height: inherit;
+}
+
+div.image {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin-left: 5px;
+  overflow: hidden;
+  width: 320px;
+}
+div.image img {
+  width: 320px;
+}
+
+div.video {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin-left: 5px;
+  overflow: hidden;
+  width: 320px;
+}
+div.video video {
+  overflow: hidden;
+  width: 320px;
+  height: 240px;
+}
+
+.collapsed {
+  display: none;
+}
+
+.expander::after {
+  content: " (show details)";
+  color: #BBB;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.collapser::after {
+  content: " (hide details)";
+  color: #BBB;
+  font-style: italic;
+  cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+  cursor: pointer;
+}
+
+.sort-icon {
+  font-size: 0px;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+  /*triangle*/
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.inactive .sort-icon {
+  /*finish triangle*/
+  border-top: 8px solid #E6E6E6;
+}
+.asc.active .sort-icon {
+  /*finish triangle*/
+  border-bottom: 8px solid #999;
+}
+.desc.active .sort-icon {
+  /*finish triangle*/
+  border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) { // eslint-disable-line no-redeclare
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function findAll(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sortColumn(elem) {
+    toggleSortStates(elem);
+    const colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    let key;
+    if (elem.classList.contains('result')) {
+        key = keyResult;
+    } else if (elem.classList.contains('links')) {
+        key = keyLink;
+    } else {
+        key = keyAlpha;
+    }
+    sortTable(elem, key(colIndex));
+}
+
+function showAllExtras() { // eslint-disable-line no-unused-vars
+    findAll('.col-result').forEach(showExtras);
+}
+
+function hideAllExtras() { // eslint-disable-line no-unused-vars
+    findAll('.col-result').forEach(hideExtras);
+}
+
+function showExtras(colresultElem) {
+    const extras = colresultElem.parentNode.nextElementSibling;
+    const expandcollapse = colresultElem.firstElementChild;
+    extras.classList.remove('collapsed');
+    expandcollapse.classList.remove('expander');
+    expandcollapse.classList.add('collapser');
+}
+
+function hideExtras(colresultElem) {
+    const extras = colresultElem.parentNode.nextElementSibling;
+    const expandcollapse = colresultElem.firstElementChild;
+    extras.classList.add('collapsed');
+    expandcollapse.classList.remove('collapser');
+    expandcollapse.classList.add('expander');
+}
+
+function showFilters() {
+    const filterItems = document.getElementsByClassName('filter');
+    for (let i = 0; i < filterItems.length; i++)
+        filterItems[i].hidden = false;
+}
+
+function addCollapse() {
+    // Add links for show/hide all
+    const resulttable = find('table#results-table');
+    const showhideall = document.createElement('p');
+    showhideall.innerHTML = '<a href="javascript:showAllExtras()">Show all details</a> / ' +
+                            '<a href="javascript:hideAllExtras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    findAll('.col-result').forEach(function(elem) {
+        const collapsed = getQueryParameter('collapsed') || 'Passed';
+        const extras = elem.parentNode.nextElementSibling;
+        const expandcollapse = document.createElement('span');
+        if (extras.classList.contains('collapsed')) {
+            expandcollapse.classList.add('expander');
+        } else if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add('collapsed');
+            expandcollapse.classList.add('expander');
+        } else {
+            expandcollapse.classList.add('collapser');
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener('click', function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains('collapsed')) {
+                showExtras(event.currentTarget);
+            } else {
+                hideExtras(event.currentTarget);
+            }
+        });
+    });
+}
+
+function getQueryParameter(name) {
+    const match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () { // eslint-disable-line no-unused-vars
+    resetSortHeaders();
+
+    addCollapse();
+
+    showFilters();
+
+    sortColumn(find('.initial-sort'));
+
+    findAll('.sortable').forEach(function(elem) {
+        elem.addEventListener('click',
+            function() {
+                sortColumn(elem);
+            }, false);
+    });
+}
+
+function sortTable(clicked, keyFunc) {
+    const rows = findAll('.results-table-row');
+    const reversed = !clicked.classList.contains('asc');
+    const sortedRows = sort(rows, keyFunc, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    const thead = document.getElementById('results-table-head');
+    document.getElementById('results-table').remove();
+    const parent = document.createElement('table');
+    parent.id = 'results-table';
+    parent.appendChild(thead);
+    sortedRows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName('BODY')[0].appendChild(parent);
+}
+
+function sort(items, keyFunc, reversed) {
+    const sortArray = items.map(function(item, i) {
+        return [keyFunc(item), i];
+    });
+
+    sortArray.sort(function(a, b) {
+        const keyA = a[0];
+        const keyB = b[0];
+
+        if (keyA == keyB) return 0;
+
+        if (reversed) {
+            return keyA < keyB ? 1 : -1;
+        } else {
+            return keyA > keyB ? 1 : -1;
+        }
+    });
+
+    return sortArray.map(function(item) {
+        const index = item[1];
+        return items[index];
+    });
+}
+
+function keyAlpha(colIndex) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[colIndex].firstChild.data.toLowerCase();
+    };
+}
+
+function keyLink(colIndex) {
+    return function(elem) {
+        const dataCell = elem.childNodes[1].childNodes[colIndex].firstChild;
+        return dataCell == null ? '' : dataCell.innerText.toLowerCase();
+    };
+}
+
+function keyResult(colIndex) {
+    return function(elem) {
+        const strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+            'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[colIndex].firstChild.data);
+    };
+}
+
+function resetSortHeaders() {
+    findAll('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    findAll('.sortable').forEach(function(elem) {
+        const icon = document.createElement('div');
+        icon.className = 'sort-icon';
+        icon.textContent = 'vvv';
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove('desc', 'active');
+        elem.classList.add('asc', 'inactive');
+    });
+}
+
+function toggleSortStates(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        resetSortHeaders();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function isAllRowsHidden(value) {
+    return value.hidden == false;
+}
+
+function filterTable(elem) { // eslint-disable-line no-unused-vars
+    const outcomeAtt = 'data-test-result';
+    const outcome = elem.getAttribute(outcomeAtt);
+    const classOutcome = outcome + ' results-table-row';
+    const outcomeRows = document.getElementsByClassName(classOutcome);
+
+    for(let i = 0; i < outcomeRows.length; i++){
+        outcomeRows[i].hidden = !elem.checked;
+    }
+
+    const rows = findAll('.results-table-row').filter(isAllRowsHidden);
+    const allRowsHidden = rows.length == 0 ? true : false;
+    const notFoundMessage = document.getElementById('not-found-message');
+    notFoundMessage.hidden = !allRowsHidden;
+}
+</script>
+    <h1>test_result.html</h1>
+    <p>Report generated on 11-Aug-2021 at 19:09:32 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Packages</td>
+        <td>{"pluggy": "0.13.1", "py": "1.10.0", "pytest": "6.2.4"}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.19041-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{"anyio": "2.2.0", "dependency": "0.5.1", "html": "3.1.1", "metadata": "1.11.0", "typeguard": "2.12.1"}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.8.8</td></tr></table>
+    <h2>Summary</h2>
+    <p>103 tests ran in 2850.76 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">103 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable" col="duration">Duration</th>
+          <th class="sortable links" col="links">Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_proper__init</td>
+          <td class="col-duration">3.12</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_empty__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrongly_named__init</td>
+          <td class="col-duration">3.22</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_proper__initialize_forecaster</td>
+          <td class="col-duration">7.89</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2021-08-11 18:22:19.447482: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:22:19.447566: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrongly_typed__initialize_forecaster</td>
+          <td class="col-duration">3.09</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_value_error__initialize_forecaster[hyperparameter0]</td>
+          <td class="col-duration">3.01</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_value_error__initialize_forecaster[hyperparameter1]</td>
+          <td class="col-duration">3.08</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_type_error__initialize_forecaster[hyperparameter0]</td>
+          <td class="col-duration">3.06</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_type_error__initialize_forecaster[hyperparameter1]</td>
+          <td class="col-duration">3.07</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_type_error__initialize_forecaster[hyperparameter2]</td>
+          <td class="col-duration">3.16</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_name_error__initialize_forecaster</td>
+          <td class="col-duration">3.13</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_hyperparameters_key_error__initialize_forecaster</td>
+          <td class="col-duration">3.12</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_load_existing_model__init</td>
+          <td class="col-duration">7.64</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2021-08-11 18:22:51.817040: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:22:51.817125: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_load_not_existing_model__init</td>
+          <td class="col-duration">3.11</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_load_existing_model_opposite_transformation__init</td>
+          <td class="col-duration">12.32</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2021-08-11 18:23:02.548783: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:23:02.548866: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2021-08-11 18:23:07.378509: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:23:07.378569: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_proper__make_forecast</td>
+          <td class="col-duration">8.38</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2021-08-11 18:23:14.944272: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:23:14.944387: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrongly_typed__make_forecast</td>
+          <td class="col-duration">7.57</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2021-08-11 18:23:23.310540: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:23:23.310653: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_too_large_n_periods__make_forecast</td>
+          <td class="col-duration">3.68</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_arima_forecaster.py::test_wrong_instance__make_forecast</td>
+          <td class="col-duration">3.11</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_proper__init</td>
+          <td class="col-duration">3.35</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_empty__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_wrongly_typed__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_wrong_file__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_proper_return_path__generate_preprocessed_data</td>
+          <td class="col-duration">12.94</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_proper_return_dataset__generate_preprocessed_data</td>
+          <td class="col-duration">12.70</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_proper_overwrite_if_exists__generate_preprocessed_data</td>
+          <td class="col-duration">25.56</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_proper_all_true__generate_preprocessed_data</td>
+          <td class="col-duration">25.68</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_wrongly_typed__generate_preprocessed_data</td>
+          <td class="col-duration">3.47</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_proper__get_preprocessed_data</td>
+          <td class="col-duration">16.23</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_data_handler.py::test_file_does_not_exist__get_preprocessed_data</td>
+          <td class="col-duration">3.48</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_proper__init</td>
+          <td class="col-duration">3.05</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_empty__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrongly_named__init</td>
+          <td class="col-duration">3.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_proper__initialize_forecaster</td>
+          <td class="col-duration">21.99</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+<br/> ------------------------------Captured stderr call------------------------------ <br/>2021-08-11 18:25:25.250452: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:25.250493: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:25.251283: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:25.253244: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:25.253252: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:25.254447: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:25.335843: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:25.336892: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:25.337197: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:25.337810: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:25.338128: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:25.338681: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:25.339002: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:25.339539: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:25.340002: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:25.340121: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:25.340584: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:25.340808: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:25.341060: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:25.341475: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:25.341696: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:25.341966: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:25.342080: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:25.342645: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:25.342740: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:25.342809: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:25.342827: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:25.343105: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:25.343201: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:25.344005: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:25.344204: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:25.344223: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:25.344243: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:25.344266: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:25.344412: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:25.344542: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:25.344712: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:25.345374: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:25.345403: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:25.345420: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:25.345525: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:25.345563: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:25.346012: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:25.346078: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:25.346112: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:25.346675: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:25.346698: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:25.346786: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:25.346916: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:25.347389: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:25.347419: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:25.347819: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:25.348115: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:25.348160: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:25.348278: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:25.349291: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:25.349315: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:25.349466: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:25.349747: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:25.350438: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:25.350440: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:25.350461: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:25.350453: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:25.350951: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:25.351561: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:25.351604: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:25.351629: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:25.351697: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:25.351715: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:25.352860: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:25.352863: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:25.352885: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:25.352897: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:25.353399: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:25.353418: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:25.353409: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:25.353478: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:25.354154: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:25.354179: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:25.354180: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:25.354332: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:25.354356: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:25.355015: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:25.355044: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:25.690594: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:25.695212: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:25.728218: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:25.735589: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:25.768503: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:25.783100: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:29.629468: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library nvcuda.dll
+2021-08-11 18:25:29.662135: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:08:00.0 name: NVIDIA GeForce GTX 1070 computeCapability: 6.1
+coreClock: 1.7715GHz coreCount: 15 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 238.66GiB/s
+2021-08-11 18:25:29.663363: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudart64_110.dll&#x27;; dlerror: cudart64_110.dll not found
+2021-08-11 18:25:29.664271: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublas64_11.dll&#x27;; dlerror: cublas64_11.dll not found
+2021-08-11 18:25:29.665142: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cublasLt64_11.dll&#x27;; dlerror: cublasLt64_11.dll not found
+2021-08-11 18:25:29.666023: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cufft64_10.dll&#x27;; dlerror: cufft64_10.dll not found
+2021-08-11 18:25:29.666898: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;curand64_10.dll&#x27;; dlerror: curand64_10.dll not found
+2021-08-11 18:25:29.667764: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusolver64_11.dll&#x27;; dlerror: cusolver64_11.dll not found
+2021-08-11 18:25:29.668621: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cusparse64_11.dll&#x27;; dlerror: cusparse64_11.dll not found
+2021-08-11 18:25:29.669471: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#x27;cudnn64_8.dll&#x27;; dlerror: cudnn64_8.dll not found
+2021-08-11 18:25:29.669493: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2021-08-11 18:25:29.670269: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-08-11 18:25:29.671141: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-08-11 18:25:29.671170: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2021-08-11 18:25:30.131980: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-08-11 18:25:37.980024: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+<br/> -------------------------------Captured log call-------------------------------- <br/>WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_1_layer_call_and_return_conditional_losses, lstm_cell_1_layer_call_fn, lstm_cell_1_layer_call_fn, lstm_cell_1_layer_call_and_return_conditional_losses, lstm_cell_1_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrongly_typed__initialize_forecaster</td>
+          <td class="col-duration">3.17</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrong_hyperparameters_name_error__initialize_forecaster</td>
+          <td class="col-duration">3.06</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrong_hyperparameters_value_error__initialize_forecaster[hyperparameter0]</td>
+          <td class="col-duration">3.09</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrong_hyperparameters_value_error__initialize_forecaster[hyperparameter1]</td>
+          <td class="col-duration">3.19</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrong_hyperparameters_type_error__initialize_forecaster[hyperparameter0]</td>
+          <td class="col-duration">3.17</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrong_hyperparameters_type_error__initialize_forecaster[hyperparameter1]</td>
+          <td class="col-duration">3.20</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_load_existing_model__init</td>
+          <td class="col-duration">29.47</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+<br/> -------------------------------Captured log call-------------------------------- <br/>WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_3_layer_call_and_return_conditional_losses, lstm_cell_3_layer_call_fn, lstm_cell_3_layer_call_fn, lstm_cell_3_layer_call_and_return_conditional_losses, lstm_cell_3_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_load_not_existing_model__init</td>
+          <td class="col-duration">3.13</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_proper__make_forecast</td>
+          <td class="col-duration">21.87</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+<br/> -------------------------------Captured log call-------------------------------- <br/>WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_6_layer_call_and_return_conditional_losses, lstm_cell_6_layer_call_fn, lstm_cell_6_layer_call_fn, lstm_cell_6_layer_call_and_return_conditional_losses, lstm_cell_6_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_random_state__make_forecast</td>
+          <td class="col-duration">82.15</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+
+
+
+<br/> -------------------------------Captured log call-------------------------------- <br/>WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_8_layer_call_and_return_conditional_losses, lstm_cell_8_layer_call_fn, lstm_cell_8_layer_call_fn, lstm_cell_8_layer_call_and_return_conditional_losses, lstm_cell_8_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.
+WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_10_layer_call_and_return_conditional_losses, lstm_cell_10_layer_call_fn, lstm_cell_10_layer_call_fn, lstm_cell_10_layer_call_and_return_conditional_losses, lstm_cell_10_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.
+WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_12_layer_call_and_return_conditional_losses, lstm_cell_12_layer_call_fn, lstm_cell_12_layer_call_fn, lstm_cell_12_layer_call_and_return_conditional_losses, lstm_cell_12_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.
+WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_14_layer_call_and_return_conditional_losses, lstm_cell_14_layer_call_fn, lstm_cell_14_layer_call_fn, lstm_cell_14_layer_call_and_return_conditional_losses, lstm_cell_14_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrongly_typed__make_forecast</td>
+          <td class="col-duration">21.73</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+<br/> -------------------------------Captured log call-------------------------------- <br/>WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_16_layer_call_and_return_conditional_losses, lstm_cell_16_layer_call_fn, lstm_cell_16_layer_call_fn, lstm_cell_16_layer_call_and_return_conditional_losses, lstm_cell_16_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_too_large_n_periods__make_forecast</td>
+          <td class="col-duration">23.33</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>
+<br/> -------------------------------Captured log call-------------------------------- <br/>WARNING  absl:save.py:238 Found untraced functions such as lstm_cell_18_layer_call_and_return_conditional_losses, lstm_cell_18_layer_call_fn, lstm_cell_18_layer_call_fn, lstm_cell_18_layer_call_and_return_conditional_losses, lstm_cell_18_layer_call_and_return_conditional_losses while saving (showing 5 of 5). These functions will not be directly callable after loading.<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_lstm_forecaster.py::test_wrong_instance__make_forecast</td>
+          <td class="col-duration">3.13</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_proper__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_empty__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrongly_typed__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrongly_named__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_proper__initialize_recommender</td>
+          <td class="col-duration">1131.66</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrongly_typed__initialize_recommender</td>
+          <td class="col-duration">3.87</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_number_of_recommendations__initialize_recommender</td>
+          <td class="col-duration">3.77</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_load_existing_model__init</td>
+          <td class="col-duration">0.03</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_load_not_existing_model__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_load_existing_model_without_files__init</td>
+          <td class="col-duration">1109.14</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_proper_single_product__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_proper_product_list__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrongly_typed__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_single_product__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_product_list__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_single_product_ignore_if_not_exists__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_product_list_ignore_if_not_exist__get_top_recommended_products_for_product</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_proper_single_customer__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_proper_customer_list__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrongly_typed__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_single_customer__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_customer_list__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_single_customer_ignore_if_not_exists__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_wrong_customer_list_ignore_if_not_exist__get_top_recommended_products_for_customer</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_product_recommender.py::test_not_initialized_recommender__get_top_recommended_products_for_product_or_customer</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_proper__init</td>
+          <td class="col-duration">5.49</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_empty__init</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrongly_typed__init</td>
+          <td class="col-duration">5.33</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrongly_named__init</td>
+          <td class="col-duration">5.30</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_proper__initialize_purchase_predictor</td>
+          <td class="col-duration">6.40</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrongly_typed__initialize_purchase_predictor</td>
+          <td class="col-duration">5.42</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_key_error__initialize_purchase_predictor[settings0]</td>
+          <td class="col-duration">5.30</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_key_error__initialize_purchase_predictor[settings1]</td>
+          <td class="col-duration">5.31</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_name_error__initialize_purchase_predictor[settings0]</td>
+          <td class="col-duration">5.33</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_name_error__initialize_purchase_predictor[settings1]</td>
+          <td class="col-duration">5.34</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_value_error__initialize_purchase_predictor[settings0]</td>
+          <td class="col-duration">5.29</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_value_error__initialize_purchase_predictor[settings1]</td>
+          <td class="col-duration">5.34</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_type_error__initialize_purchase_predictor[settings0]</td>
+          <td class="col-duration">5.31</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_type_error__initialize_purchase_predictor[settings1]</td>
+          <td class="col-duration">5.36</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_hyperparameters_type_error__initialize_purchase_predictor[settings2]</td>
+          <td class="col-duration">5.40</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_load_existing_model__init</td>
+          <td class="col-duration">6.15</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_load_not_existing_model__init</td>
+          <td class="col-duration">5.39</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_load_existing_model_opposite_transformation__init</td>
+          <td class="col-duration">7.01</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_proper_simple_customer_id__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.23</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_proper_list_customer_id__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.34</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_simple_customer_id__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.24</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_simple_customer_id_ignore_if_not_exists__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.40</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_list_customer_id__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.28</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_list_customer_id_ignore_if_not_exists__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.21</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrongly_typed__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">6.21</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_instance__predict_if_customer_purchases_next_quarter</td>
+          <td class="col-duration">5.31</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_proper__get_all_customers_purchasing_next_quarter</td>
+          <td class="col-duration">6.11</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_random_state__get_all_customers_purchasing_next_quarter</td>
+          <td class="col-duration">8.70</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_instance__get_all_customers_purchasing_next_quarter</td>
+          <td class="col-duration">5.28</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_proper__get_all_customers_not_purchasing_next_quarter</td>
+          <td class="col-duration">6.11</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_purchase_predictor.py::test_wrong_instance__get_all_customers_not_purchasing_next_quarter</td>
+          <td class="col-duration">5.29</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>

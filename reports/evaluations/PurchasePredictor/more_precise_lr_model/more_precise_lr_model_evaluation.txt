@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------
+General Model Info
+-------------------------------------------------------------------------
+	Model-Name: more_precise_lr_model
+	Model-Type: LogisticRegression
+	Model-Hyperparameters:
+		C: 0.05
+		class_weight: None
+		dual: False
+		fit_intercept: True
+		intercept_scaling: 1
+		l1_ratio: None
+		max_iter: 100
+		multi_class: auto
+		n_jobs: None
+		penalty: l2
+		random_state: 95
+		solver: lbfgs
+		tol: 0.0001
+		verbose: 0
+		warm_start: False
+
+-------------------------------------------------------------------------
+Best Mean CV Test-Scores (5 Splits)
+-------------------------------------------------------------------------
+	F0.5-Score at different thresholds across splits (mean=0.58): 0.7827
+	F0.5-Score at threshold = 0.5: 0.7586
+	Balanced-Accuracy-Score: 0.8062
+
+-------------------------------------------------------------------------
+Training-Scores (Refit Model) (Threshold = 0.58)
+-------------------------------------------------------------------------
+	F0.5-Score: 0.7657
+	Balanced-Accuracy-Score: 0.7830
+
+-------------------------------------------------------------------------
+Hold-Out-Set Test-Scores (Refit Model) (Threshold = 0.58)
+-------------------------------------------------------------------------
+	F0.5-Score: 0.7930
+	Balanced-Accuracy-Score: 0.8165

@@ -1,0 +1,44 @@
+-------------------------------------------------------------------------
+General Model Info
+-------------------------------------------------------------------------
+	Model-Name: more_precise_rf_model
+	Model-Type: RandomForestClassifier
+	Model-Hyperparameters:
+		bootstrap: True
+		ccp_alpha: 0.0
+		class_weight: balanced_subsample
+		criterion: entropy
+		max_depth: 10
+		max_features: auto
+		max_leaf_nodes: None
+		max_samples: None
+		min_impurity_decrease: 0.0
+		min_impurity_split: None
+		min_samples_leaf: 1
+		min_samples_split: 64
+		min_weight_fraction_leaf: 0.0
+		n_estimators: 300
+		n_jobs: None
+		oob_score: False
+		random_state: 95
+		verbose: 0
+		warm_start: False
+
+-------------------------------------------------------------------------
+Best Mean CV Test-Scores (5 Splits)
+-------------------------------------------------------------------------
+	F0.5-Score at different thresholds across splits (mean=0.67): 0.8037
+	F0.5-Score at threshold = 0.5: 0.7713
+	Balanced-Accuracy-Score: 0.8563
+
+-------------------------------------------------------------------------
+Training-Scores (Refit Model) (Threshold = 0.67)
+-------------------------------------------------------------------------
+	F0.5-Score: 0.8355
+	Balanced-Accuracy-Score: 0.8732
+
+-------------------------------------------------------------------------
+Hold-Out-Set Test-Scores (Refit Model) (Threshold = 0.67)
+-------------------------------------------------------------------------
+	F0.5-Score: 0.7606
+	Balanced-Accuracy-Score: 0.8296
