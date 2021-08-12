@@ -70,7 +70,7 @@ For generating product recommendations a kNN-inspired IBCF (item-based collabora
 ### 1. 4. Additional Notes
 * All models and hyperparameter configurations tried in this project are shown in [model_creator.py](https://github.com/ML195/Retailanalyzer/blob/master/docs/build/html/index.html). 
 * To get an overview of the best models and their achieved scores, have a look at [short_model_evaluation_summary.pdf](https://github.com/ML195/Retailanalyzer/blob/master/reports/short_model_evaluation_summary.pdf). 
-* More detailed information about the implemented modules can be found in the [code documentation](https://htmlpreview.github.io/?https://github.com/ML195/Retailanalyzer/blob/master/docs/build/html/index.html). 
+* More detailed information about the implemented modules can be found in the [code documentation](https://retailanalyzer.readthedocs.io/en/latest/?). 
 * To get a quick overview, see [example_usage.py](https://github.com/ML195/Retailanalyzer/blob/master/src/example_usage.py), which contains an implementaion and explanation of simple usecases showcasing how the modules can be used. 
 
 ## 2. Folder Structure
