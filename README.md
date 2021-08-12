@@ -6,8 +6,9 @@ This Python project implements a solution for the following three issues using t
 
 
 ## 1. Approach Summary
+![general_approach](https://user-images.githubusercontent.com/88842385/129218719-6c24c0a9-4caa-4a46-a389-616ab299ed26.PNG)
 
-The figure above shows the general approach used to solve the three issues. First the input data is prepared for further steps via the DataHandler. Depending on the problem, a specific preprocessing strategy can be passed to the DataHandler, including the SalesForecasterPreprocessor, the PurchasePredictorPreprocessor and the ProductRecommenderPreprocessor. This results in a total of three prepared data sets, each involving different data cleaning steps and feature sets specifically built for the following task. A more detailed description of the features is included in the (preliminiary_analysis.pdf). Based on these prepared data sets the tasks are then solved using appropriate models.
+The figure above shows the general approach used to solve the three issues. First the input data is prepared for further steps via the DataHandler. Depending on the problem, a specific preprocessing strategy can be passed to the DataHandler, including the SalesForecasterPreprocessor, the PurchasePredictorPreprocessor and the ProductRecommenderPreprocessor. This results in a total of three prepared data sets, each involving different data cleaning steps and feature sets specifically built for the following task. A more detailed description of the features is included in the [preliminiary_analysis](https://htmlpreview.github.io/?https://github.com/ML195/Retailanalyzer/blob/master/notebooks/preliminary_analysis.html). Based on these prepared data sets the tasks are then solved using appropriate models.
 
 ### 1. 1. Sales Forecasting
 Sales forecasting can be done with an ARIMAForecaster and an LSTMForecaster. For both forecasters GridSearchCV with TimeSeriesSplitCV (6 splits, each testing on 8 future periods) is performed over a predefined search space which can be provided through a hyperparamter grid, such as the ones shown below.
@@ -67,10 +68,10 @@ PURCHASE_PREDICTOR_SETTINGS = [
 For generating product recommendations a kNN-inspired IBCF (item-based collaborative filtering) recommender is implemented. The recommender is evaluated using a random train/test split (5 splits) where each split's test set includes 10 purchased items for each customer, that was removed from the split's training data. Based on that the average hit-rate as well as the average reciprocal hit-rate is calcualted. 
 
 ### 1. 4. Additional Notes
-* All models and hyperparameter configurations tried in this project are shown in the model_creator.py module (link).
+* All models and hyperparameter configurations tried in this project are shown in [model_creator.py](https://github.com/ML195/Retailanalyzer/blob/master/docs/build/html/index.html). 
 * To see the best models and their achieved scores, have a look at (link). 
-* More detailed information about the implemented modules can be found in the code documentation (link). 
-* To get a quick overview, see the src/modelcreator/example_usage.py module, which contains an implementaion and explanation of simple usecases showcasing how the modules can be used. 
+* More detailed information about the implemented modules can be found in the [code documentation.py](https://htmlpreview.github.io/?https://github.com/ML195/Retailanalyzer/blob/master/docs/build/html/index.html). 
+* To get a quick overview, see [example_usage.py](https://github.com/ML195/Retailanalyzer/blob/master/src/example_usage.py), which contains an implementaion and explanation of simple usecases showcasing how the modules can be used. 
 
 ## 2. Folder Structure
 <pre>
