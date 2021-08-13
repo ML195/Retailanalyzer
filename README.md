@@ -65,7 +65,7 @@ PURCHASE_PREDICTOR_SETTINGS = [
 ```
 
 ### 1. 3. Product Recommendation
-For generating product recommendations a kNN-inspired IBCF (item-based collaborative filtering) recommender is implemented. The recommender is evaluated using a random train/test split (5 splits) where each split's test set includes 10 purchased items for each customer, that was removed from the split's training data. Based on that the average hit-rate as well as the average reciprocal hit-rate is calcualted. 
+For generating product recommendations a kNN-inspired IBCF (item-based collaborative filtering) recommender is implemented. The recommender is evaluated using a random train/test split (5 splits) where each split's test set includes 10 purchased items for each customer, that were removed from the split's training data. Based on that the average hit-rate as well as the average reciprocal hit-rate is calcualted. 
 
 ### 1. 4. Additional Notes
 * All models and hyperparameter configurations tried in this project are shown in [model_creator.py](https://github.com/ML195/Retailanalyzer/blob/master/docs/build/html/index.html). 
